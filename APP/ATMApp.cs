@@ -8,7 +8,7 @@ using ATMApp.UI;
 
 namespace ATMApp
 {
-    public class ATMApp : IUserLogin
+    public class ATMApp : IUserLogin, IUserAccountActions
     {
         private List<UserAccount> userAccountList;
         private UserAccount selectedAccount;
@@ -16,7 +16,7 @@ namespace ATMApp
         public void Run()
         {
             AppScreen.Welcome();
-            CheckUserCardNumberAndPassword();
+            CheckUserCardNumberAndPassword(); 
             AppScreen.WelcomeCustomer(selectedAccount.FullName);
             AppScreen.DisplayAppmenu();
             ProcessMenuOptions();
@@ -84,7 +84,7 @@ namespace ATMApp
             switch (Validator.Convert<int>("an option:"))
             {
                 case (int)AppMenu.CheckBalance:
-                    Console.WriteLine("Checking account balance...");
+                    CheckBalance();                        
                     break;
                 case (int)AppMenu.PlaceDeposit:
                     Console.WriteLine("Placing deposit...");
@@ -110,6 +110,20 @@ namespace ATMApp
             }
         }
 
+        public void CheckBalance()
+        {
+            Utility.PrintMessage($"Your account balance is: {Utility.FormatAmount(selectedAccount.AccountBalance)}");
+        }
+
+        public void PlaceDeposit()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MakeWithDrawal()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
